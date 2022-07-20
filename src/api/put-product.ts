@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { Product } from "../model/product";
+import { Product } from "../model/Product";
 import { DynamoDbStore } from "../store/dynamodb/dynamodb-store";
 import { ProductStore } from "../store/product-store";
 import { captureLambdaHandler } from '@aws-lambda-powertools/tracer';
@@ -47,7 +47,7 @@ const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPro
     if ((typeof product) !== "object" ){
       throw Error("Parsed product is not an object")
     }
-  } catch (error) {
+  } catch (error: any) {
     logger.error('Unexpected error occurred while trying to create a product', error);
 
     return {
@@ -82,7 +82,7 @@ const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPro
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ message: "Product created" }),
     };
-  } catch (error) {
+  } catch (error: any) {
     logger.error('Unexpected error occurred while trying to create a product', error);
 
     return {
