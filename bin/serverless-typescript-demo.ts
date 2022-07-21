@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
-import { ServerlessTypescriptDemoStack } from '../lib/serverless-typescript-demo-stack';
+import { ServerlessTypescriptDemoStack } from '../lib/serverless-typescript-demo-stack.js';
 
 const app = new cdk.App();
 new ServerlessTypescriptDemoStack(app, 'ServerlessTypescriptDemoStack', {

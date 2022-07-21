@@ -1,14 +1,14 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { Product } from "../model/Product";
-import { DynamoDbStore } from "../store/dynamodb/dynamodb-store";
-import { ProductStore } from "../store/product-store";
+import { Product } from "../model/Product.js";
+import { DynamoDbStore } from "../store/dynamodb/dynamodb-store.js";
+import { ProductStore } from "../store/product-store.js";
 import { captureLambdaHandler } from '@aws-lambda-powertools/tracer';
 import { injectLambdaContext } from '@aws-lambda-powertools/logger';
 import { logMetrics, MetricUnits } from '@aws-lambda-powertools/metrics';
 import middy from "@middy/core";
-import { logger, metrics, tracer } from "../powertools/utilities";
+import { logger, metrics, tracer } from "../powertools/utilities.js";
 
 const store: ProductStore = new DynamoDbStore();
 const lambdaHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {

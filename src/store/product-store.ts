@@ -1,6 +1,6 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-import { Product } from "../model/Product";
+import { Product } from "../model/Product.js";
 
 export interface ProductStore {
   getProduct: (id: string) => Promise<Product | undefined>;

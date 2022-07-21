@@ -30,6 +30,11 @@ Deploy the demo to your AWS account using [AWS CDK](https://aws.amazon.com/cdk/)
 
 ```bash
 npm install
+
+# optional, type check and unit test the stack and lambda functions before
+# deployment
+npm test
+
 cdk deploy
 ```
 
