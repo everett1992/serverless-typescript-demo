@@ -9,6 +9,7 @@ import {
   aws_logs,
   aws_lambda,
 } from "aws-cdk-lib";
+import {NodejsFunctionProps} from "aws-cdk-lib/aws-lambda-nodejs";
 
 export class ServerlessTypescriptDemoStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -33,20 +34,27 @@ export class ServerlessTypescriptDemoStack extends Stack {
       removalPolicy: RemovalPolicy.DESTROY
     });
 
+    const functionSettings: NodejsFunctionProps = {
+      runtime: aws_lambda.Runtime.NODEJS_16_X,
+      awsSdkConnectionReuse: true,
+      memorySize: 256,
+      environment: {
+        TABLE_NAME: productsTable.tableName,
+        ...envVariables
+      },
+      logRetention: aws_logs.RetentionDays.ONE_WEEK,
+      tracing: aws_lambda.Tracing.ACTIVE,
+      bundling: {
+      }
+    }
+
     const getProductsFunction = new aws_lambda_nodejs.NodejsFunction(
       this,
       "GetProductsFunction",
       {
-        awsSdkConnectionReuse: true,
         entry: "./src/api/get-products.ts",
         handler: "handler",
-        memorySize: 256,
-        environment: {
-          TABLE_NAME: productsTable.tableName,
-          ...envVariables
-        },
-        logRetention: aws_logs.RetentionDays.ONE_WEEK,
-        tracing: aws_lambda.Tracing.ACTIVE,
+        ...functionSettings,
       }
     );
 
@@ -54,16 +62,9 @@ export class ServerlessTypescriptDemoStack extends Stack {
       this,
       "GetProductFunction",
       {
-        awsSdkConnectionReuse: true,
         entry: "./src/api/get-product.ts",
         handler: "handler",
-        memorySize: 256,
-        environment: {
-          TABLE_NAME: productsTable.tableName,
-          ...envVariables
-        },
-        logRetention: aws_logs.RetentionDays.ONE_WEEK,
-        tracing: aws_lambda.Tracing.ACTIVE,
+        ...functionSettings,
       }
     );
 
@@ -71,16 +72,9 @@ export class ServerlessTypescriptDemoStack extends Stack {
       this,
       "PutProductFunction",
       {
-        awsSdkConnectionReuse: true,
         entry: "./src/api/put-product.ts",
         handler: "handler",
-        memorySize: 256,
-        environment: {
-          TABLE_NAME: productsTable.tableName,
-          ...envVariables
-        },
-        logRetention: aws_logs.RetentionDays.ONE_WEEK,
-        tracing: aws_lambda.Tracing.ACTIVE,
+        ...functionSettings,
       }
     );
 
@@ -88,16 +82,9 @@ export class ServerlessTypescriptDemoStack extends Stack {
       this,
       "DeleteProductsFunction",
       {
-        awsSdkConnectionReuse: true,
         entry: "./src/api/delete-product.ts",
         handler: "handler",
-        memorySize: 256,
-        environment: {
-          TABLE_NAME: productsTable.tableName,
-          ...envVariables
-        },
-        logRetention: aws_logs.RetentionDays.ONE_WEEK,
-        tracing: aws_lambda.Tracing.ACTIVE,
+        ...functionSettings,
       }
     );
 

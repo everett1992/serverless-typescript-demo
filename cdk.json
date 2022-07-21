@@ -1,5 +1,5 @@
 {
-  "app": "npx ts-node --prefer-ts-exts bin/serverless-typescript-demo.ts",
+  "app": "./node_modules/.bin/ts-node --transpile-only --prefer-ts-exts bin/serverless-typescript-demo.ts",
   "watch": {
     "include": [
       "**"
