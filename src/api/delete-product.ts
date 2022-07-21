@@ -1,11 +1,11 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { DynamoDbStore } from "../store/dynamodb/dynamodb-store";
-import { ProductStore } from "../store/product-store";
+import { DynamoDbStore } from "../store/dynamodb/dynamodb-store.js";
+import { ProductStore } from "../store/product-store.js";
 import middy from "@middy/core";
 import { captureLambdaHandler } from "@aws-lambda-powertools/tracer";
-import { logger, metrics, tracer} from "../powertools/utilities";
+import { logger, metrics, tracer} from "../powertools/utilities.js";
 import { injectLambdaContext } from "@aws-lambda-powertools/logger";
 import { logMetrics, MetricUnits } from "@aws-lambda-powertools/metrics";
 

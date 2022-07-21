@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-import { Product } from "../../model/Product";
-import { ProductStore } from "../product-store";
+import { Product } from "../../model/Product.js";
+import { ProductStore } from "../product-store.js";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import {
   DeleteCommand,
@@ -12,7 +12,7 @@ import {
   ScanCommand,
 } from "@aws-sdk/lib-dynamodb";
 import { captureAWSv3Client } from "aws-xray-sdk-core";
-import { tracer } from '../../powertools/utilities';
+import { tracer } from '../../powertools/utilities.js';
 
 export class DynamoDbStore implements ProductStore {
   private static tableName = process.env.TABLE_NAME;

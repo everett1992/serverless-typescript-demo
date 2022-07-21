@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: MIT-0
 // blob/main/src/api/get-products.ts
 import { APIGatewayProxyEvent, APIGatewayProxyResult} from "aws-lambda";
-import { DynamoDbStore } from "../store/dynamodb/dynamodb-store";
-import { ProductStore } from "../store/product-store";
-import { logger, tracer, metrics } from "../powertools/utilities"
+import { DynamoDbStore } from "../store/dynamodb/dynamodb-store.js";
+import { ProductStore } from "../store/product-store.js";
+import { logger, tracer, metrics } from "../powertools/utilities.js"
 import middy from "@middy/core";
 import { captureLambdaHandler } from '@aws-lambda-powertools/tracer';
 import { injectLambdaContext } from '@aws-lambda-powertools/logger';
